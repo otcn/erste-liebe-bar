@@ -1,1380 +1,176 @@
+/*
+	RESET
+*/
+
 * {
 	margin: 0;
 	padding: 0;
 	font-size: 1em;
 	font-weight: normal;
 }
+ol {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
 
-// constants
 
-$gridSize: 	60px;
+/*
+	INIT
+*/
+@font-face {
+	font-family: 'Trade Gothik LT Bold';
+	src: url('../fonts/TradeGothicLT-Bold.ttf') format('truetype');
+}
 
-$xsmall:		350px;
-$small: 		700px;
-$medium: 		900px;
-
-$grey: #DBDBDB;
-$green: #ACFF00;
-
-// mixins
-
-@mixin cover {
-	position: absolute;
-	width: 100vw;
-	height: 100vh;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	right: 0;	
-	
-	@media only screen and (max-device-width: $small)	{
-		height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-		height: calc(var(--vh, 1vh) * 100);
+@keyframes move {
+	100% {
+		background-position: 100%;
 	}
 }
 
-// animations
+$headerHeight: 30px;
 
-@keyframes pulse { 
-	0% { 
-		opacity: 1;
-	} 
-	50% {
-		opacity: 0;
-	}
-	100% { 
-		opacity: 1;
-	} 
-}
 
-@keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-// fonts
-@import url('//hello.myfonts.net/count/3735eb');
-@font-face {font-family: 'ClassicGrotesquePro-Regular';src: url('../fonts/3735EB_0_0.eot');src: url('../fonts/3735EB_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3735EB_0_0.woff2') format('woff2'),url('../fonts/3735EB_0_0.woff') format('woff'),url('../fonts/3735EB_0_0.ttf') format('truetype');}
+/*
+	GLOBALS
+*/
 
 body {	
-	font-family: "ClassicGrotesquePro-Regular", sans-serif;
-	font-size: 9pt;
+	font-family: 'Trade Gothik LT Bold', sans-serif;
+	font-size: 1em;
 	line-height: 1.5em;
-	text-transform: uppercase;
-	
-	background-attachment: fixed;
-	
+	text-transform: lowercase;
+		
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	
-	padding: calc(#{$gridSize} / 2) calc(#{$gridSize} / 2) 0;
-	
-	@media only screen and (max-width: $medium) {
-		padding: calc(#{$gridSize} / 2) calc(#{$gridSize} / 6) 0;
-	}
+	color: #000;
 }
 
-::selection,
-::-webkit-selection {
-	background-color: #333;
-	color: #fff;
+img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
-::-moz-selection {
-	background-color: #333;
-	color: #fff;	
-}
 
-::-ms-selection {
-	background-color: #333;
-	color: #fff;		
-}
-
-.grid {
-	background-size: $gridSize $gridSize;
-	background-image: radial-gradient(circle at 1px 1px, #000000 1px,rgba(0,0,0,0) 0px);
-	
-	&.dark {
-		background-color: black;
-		background-image: radial-gradient(circle at 1px 1px, #ffffff 1px,rgba(0,0,0,0) 0px);
-	}
-
-	&.home,
-	&.default,
-	&.press,
-	&.error,
-	&.login-closed,
-	&.login-order,
-	&.register-clients,
-	&.newsletter {
-		background-color: #726F70;
-		background-image: radial-gradient(circle at 1px 1px, #ffffff 1px,rgba(0,0,0,0) 0px);
-	}
-}
-
-.register,
-.login {
-	
-	min-height: calc(100vh - #{$gridSize} / 2);
-	
-	@media only screen and (max-width: $small)	{
-		min-height: 0;
-	}
-	
-	padding-left: 0;
-	padding-right: 0;
-	padding-bottom: 0;	
-	
-	.verticallyCentered {
-		height: calc(100vh - #{$gridSize});
-		box-sizing: border-box;
-		padding-top: 25vh;
-		
-		@media only screen and (max-width: $xsmall)	{
-			padding-top: 23vh;	
-		}
-		
-		@media only screen and (max-width: $small)	{
-			padding-top: 12vh;
-		}
-	}
-
-	canvas {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100vh;
-		width: 100vw;
-		z-index: -10;
-		
-		@media only screen and (max-width: $xsmall)	{
-			margin-top: -16vh;
-		}
-		
-		@media only screen and (max-width: $small)	{
-			margin-top: -10vh;
-		}
-	}
-}
-
-.login {
-	.verticallyCentered {
-		padding-top: 28vh;
-	
-		@media only screen and (max-width: $small)	{
-			padding-top: 28vh;
-		}
-		
-		@media only screen and (max-width: $xsmall)	{
-			padding-top: 18vh;	
-		}
-	}
-	
-	canvas {
-		margin-top: 15vh;
-		max-height: 85vh;
-		
-		@media only screen and (max-width: $small)	{
-			margin-top: 2vh;
-			max-height: 80vh;
-		}
-	
-		@media only screen and (max-width: $xsmall)	{
-			margin-top: 7vh;
-			max-height: 60vh;
-		}
-	}
-}
-
-// 01 GENERICS
-
-.logo {
-	h1 {
-		font-size: 1em;
-		position: absolute;
-		display: inline;
-		text-indent: -9999px;
-	}
-	
-	a svg {
-		margin: 0 auto;
-		display: block;
-		
-		height: 1.25em;
-		width: auto;
-	}
-}
-
-h2, h3, h4 {
-	margin-bottom: 1em;
-}
-
-p {
-	margin-bottom: 1em;
-}
-
-a {
-	color: inherit;
-	
-	&:hover {
-		text-decoration: none;
-	}
-}
-
-// 02 SPECIFIC MODULES
-
-nav {	
-	a {
-		text-decoration: none;
-		
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-	
-	ul {
-		margin: 0 auto;
-		list-style: none;
-		display: flex;
-		justify-content: center;
-		
-		li {
-			list-style: none;
-			margin: 0 5px;
-		}
-	}
-}
+/*
+	LAYOUT
+*/
 
 header {
-	padding: calc(#{$gridSize} / 2) 0;
+	padding: 3px 5px;
 }
 
-footer {
-	padding-bottom: calc(#{$gridSize} / 2);
-	
-}
-
-body.home,
-body.login,
-body.login-closed,
-body.imprint,
-body.register,
-body.gallery,
-body.show,
-body.error,
-body.press,
-body.order-landing {	
-	footer {
-		position: absolute;
-		width: 100%;
-		left: 0;
-		
-		padding-bottom: 0;
-		bottom: calc(#{$gridSize} / 2);
-	}
-}
-
-
-// 03 LAYOUT
-
-.centered {
-	text-align: center;
-	
-	div > p,
-	p {
-		max-width: 400px;
-		margin: 0 auto;
-		
-		@media only screen and (max-width: $small)	{
-			max-width: 250px;	
-		}
-	}
-}
-
-.verticallyCentered {
+.tiles {
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	height: calc(100vh - #{$gridSize} - 2em);
+	flex-wrap: wrap;
 	
-	@media only screen and (max-width: $small)	{
-		max-height: 75vh;
-		align-items: center;
-	}
-}
-
-article {
-	max-width: 700px;
-	margin: $gridSize auto;
-	
-	ul,
-	ol {
-		padding: 0 0 1em 2em;
-	}
-	
-	ul {
-		list-style: none;
+	.tile {
+		width: 50vw;
 		
-		li:before {
-			content: '– ';
-			margin-left: -2em;
-		}
-	}
-}
-
-// 04 LOGIN & REGISTRATION
-
-.audioControls {
-	width: 100vw;
-	height: 2.5em;
-	line-height: 2.5em;
-	position: absolute;
-	bottom: 1em;
-	
-	padding: 0 2vw;
-	box-sizing: border-box;
-	
-	display: flex;
-	justify-content: center;
-	
-	span,
-	a {
-		cursor: pointer;
-		text-decoration: none;
-		
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-	
-	span {
-		margin-right: 1em;
-	}
-	
-	ul {
-		li {
-			display: inline;
-			margin-right: 1em;
-			
-			&:last-child {
-				margin-right: 0;
-			}
-		}
-	}
-}
-
-// 05 SHOW
-
-.show,
-.gallery,
-.videos {	
-	.logo {
-		transition: opacity 1.5s linear;
-		position: relative;
-		z-index: 1;
-	}
-}
-
-.show {
-	.logo {
-		z-index: 3;
-	}
-}
-
-.foyer {
-	@include cover;
-	min-height: 0;
-	
-	background: black url('../images/kikokostadinov-ss21-public.png') no-repeat center center;
-	background-size: cover;
-	
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	
-	@media only screen and (max-width: $small)	{
-		max-height: unset;
-		height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-		height: calc(var(--vh, 1vh) * 100);
-	}
-	
-	.footerHint {
-		position: absolute;
-		width: 400px;
-		bottom: calc(#{$gridSize} / 2);
-	}
-}
-
-.curtain {
-	@include cover;
-	transition: opacity 1.5s linear;
-	transition-delay: .5s;
-	background: black url('../images/SS21-flowers-tonal.svg'); // no-repeat bottom center;
-	background-size: 80px;
-	background-position: 0 -20px;
-}
-
-.video {
-	position: absolute;
-	box-sizing: border-box;
-	transition: opacity 1.5s linear;
-	cursor: pointer;
-	background: black;
-	display: flex;
-	
-
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	top: 0;
-	
-	@media only screen and (max-device-width: $small)	{
-		height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-		height: calc(var(--vh, 1vh) * 100);
-	}
-	
-	video {
-		width: 100vw;
-		display: block;
-		object-fit: contain;
-		object-position: center center;
-	}
-}
-
-.log {
-	position: absolute;
-	left: $gridSize;
-	top: calc(#{$gridSize} * 2);
-	color: red;
-	display: flex;
-	flex-direction: column;
-	
-	li {
-		text-align: center;
-		list-style: none;
-		border: 1px solid red;
-		border-radius: 1em;
-		padding: 1em 3em;
-		margin-bottom: 5px;
-		
-		transition: opacity .5s linear;
-		cursor: pointer;
-	}
-}
-
-
-// 05 COLLECTION/VIDEOS
-
-body.videos {
-	background: #fff!important;
-	background-size: unset!important;
-	background-position: unset!important;
-	overflow: hidden;
-	
-	.video {
-		cursor: default;
-	}
-	
-	.collectionFilmToggle {
-		position: fixed;
-		top: $gridSize / 2;
-		left: $gridSize / 2;
-		list-style-type: none;
-		cursor: pointer;
-		
-		li {
-			position: absolute;
-		}
-		.collectionTeaser img {		
-			width: 100%;
-			height: auto;
-		}
-		.filmTeaser img {		
-			height: 100%;
-			width: auto;
-		}
-		
-		@media (max-aspect-ratio: 4/3) {
-			left: calc(#{$gridSize} / 4);
-			top: calc(#{$gridSize} / 2);
-		}
-	}
-	
-	canvas {
-		width: 100vw;
-		height: 100vh;
-		object-fit: cover;
-		position: fixed;
-		top: 0;
-		left: 0;
-		//transform: translate(-50%, 0);
-		cursor: default;
-		
-		@media (max-aspect-ratio: 4/3) {
-			left: 40vw;
-			width: unset!important;
-			transform: translate(-40%, 0);
-		}
-	}
-	
-	aside {
-		position: fixed;
-		top: 0;
-		right: 0;
-		padding: $gridSize / 2;
-		
-		.clips {
+		.sub-tiles {
+			height: calc(100vh - #{$headerHeight});
 			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			height: calc(100vh - #{$gridSize});
+			flex-wrap: wrap;
 			
-			@media (max-aspect-ratio: 4/3) {
-				flex-direction: row;
-				height: unset;
-				overflow: scroll;
-				width: calc(100vw - (#{$gridSize} / 4));
+			// TILES STYLING
+			// General
+			.sub-tile {
+				width: 50%;
+				height: 50%;	
 			}
 			
-			li {
-				display: flex;
-				justify-content: center;
-				
-				@media (max-aspect-ratio: 4/3) {
-					margin-right: calc(#{$gridSize} / 8);
-				}
-				
-				&:first-child {
-					@media (max-aspect-ratio: 4/3) {
-						margin-left: calc(#{$gridSize} / 4);
-					}
-				}
-			}
-			
-			video {
-				height: calc((100vh - #{$gridSize} - 100px) / 11);
-				cursor: pointer;
-			}
-		}
-		
-		@media (max-aspect-ratio: 4/3) {
-			left: 0;
-			bottom: calc(#{$gridSize} / 2);
-			top: unset;
-			padding: 0;
-		}
-	}
-	
-	// footer {
-	// 	position: absolute;
-	// 	width: 100vw;
-	// 	bottom: 0;
-	// 	left: 0;
-	// }
-} 
-
-// 06 COLLECTION/GALLERY
-
-section.gallery {	
-	padding: calc(#{$gridSize} / 2);
-	display: flex;
-	justify-content: center;
-	transition: opacity 1.5s linear;
-		
-	&.hidden {
-		display: none;
-	}
-	
-	
-	@media only screen and (max-width: $medium)	{
-		padding: calc(#{$gridSize} / 2) 0 0 0;
-	}
-	
-	> div {
-		height: calc(100vh - 160px);
-		width: calc(((100vh - 160px) / 3) * 2);
-		cursor: pointer;
-		
-		@media (max-aspect-ratio: 4/3) {
-			height: calc(100vh - 180px);
-			width: calc(((100vh - 180px) / 3) * 2);
-		}
-		
-		
-		&.primary,
-		&.primary > div {
-			max-width: 95vw;
-		}
-		
-		&:first-child {
-			margin: 0 $gridSize 0 0;
-		}
-		
-		> div {
-			position: absolute;
-			height: calc(100vh - 160px);
-			width: calc(((100vh - 160px) / 3) * 2);
-			
-			@media (max-aspect-ratio: 4/3) {
-				height: calc(100vh - 180px);
-				width: calc(((100vh - 180px) / 3) * 2);
-			}
-			
-			
-			&.active {
-				opacity: 1;
-			}
-			
-			img {
+			// Image
+			// Image sizes
+			.sub-tile[data-width="full-width"] {
 				width: 100%;
+			}
+			
+			&[data-layout="vertical"] .sub-tile {
 				height: 100%;
-				object-fit: cover;
-			}
-		}
-		
-		@media (max-aspect-ratio: 4/3) {
-			&.secondary,
-			&.secondary > div {
-				position: fixed;
-				top: 0;
-				left: 0;
-				margin: 0;
-				width: 100vw;
-				height: 100vh;
-				z-index: -1;
-			}
-		}
-		@media (max-device-aspect-ratio: 4/3) {
-			&.primary,
-			&.primary > div {
-				height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-				height: calc((var(--vh, 1vh) * 100) - 170px);
-				width: calc((((var(--vh, 1vh) * 100) - 170px) / 3) * 2);
 			}
 			
-			&.secondary,
-			&.secondary > div {
-				position: fixed;
-				top: 0;
-				left: 0;
-				margin: 0;
-				width: 100vw;
-				height: 100vh;
-				z-index: -1;
+			// Image alignments
+			.sub-tile[data-alignment="top-left"] img {
+				object-position: 0 0;
 			}
-		}
-	}
-}
-
-.order-landing section.gallery {
-	> .galleryWrap {
-		height: calc(100vh - 200px);
-		width: calc(((100vh - 200px) / 3) * 2);
-		cursor: pointer;
-		
-		@media (max-aspect-ratio: 4/3) {
-			height: calc(100vh - 200px);
-			width: calc(((100vh - 200px) / 3) * 2);
-		}
-		@media (max-aspect-ratio: 4/3) {
-			&.secondary,
-			&.secondary > div {
-				position: fixed;
-				top: 0;
-				left: 0;
-				margin: 0;
-				width: 100vw;
-				height: 100vh;
-				z-index: -1;
+			.sub-tile[data-alignment="top-center"] img {
+				object-position: 50% 0;
 			}
-		}
-		@media (max-device-aspect-ratio: 4/3) {
-			&.primary,
-			&.primary > div {
-				height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-				height: calc((var(--vh, 1vh) * 100) - 180px);
-				width: calc((((var(--vh, 1vh) * 100) - 180px) / 3) * 2);
+			.sub-tile[data-alignment="top-right"] img {
+				object-position: 100% 0;
 			}
-			
-			&.secondary,
-			&.secondary > div {
-				position: fixed;
-				top: 0;
-				left: 0;
-				margin: 0;
-				width: 100vw;
-				height: 100vh;
-				z-index: -1;
+			.sub-tile[data-alignment="center-left"] img {
+				object-position: 0 50%;
 			}
-		}	
-		> div {
-			height: calc(100vh - 200px);
-			width: calc(((100vh - 200px) / 3) * 2);
-			cursor: pointer;
-			
-			@media (max-aspect-ratio: 4/3) {
-				height: calc(100vh - 200px);
-				width: calc(((100vh - 200px) / 3) * 2);
+			.sub-tile[data-alignment="center-center"] img {
+				object-position: 50% 50%;
 			}
-		}
-		
-	}
-	.navWrap {
-		bottom: $gridSize;
-	}
-}
-
-.videos .gallery {
-	@media (max-aspect-ratio: 4/3) {
-		padding: calc(60px / 1) 0 0 0;
-	}
-}
-.gallery {
-	.navWrap {
-		position: fixed;
-		width: 100vw;
-		bottom: calc(#{$gridSize} / 2);
-		height: auto;
-		
-		@media (max-aspect-ratio: 4/3) {
-			bottom: calc(#{$gridSize} / 4);
-		}
-	
-	
-	> nav {
-		position: relative;
-		margin: 0 auto;
-		
-		width: calc(((((100vh - 160px) / 3) * 2) * 2) + #{$gridSize});
-		
-		
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-		
-		.btn {
-			min-width: 60px;
-			text-align: center;
-			margin: 0;
-		}
-		
-		@media (max-aspect-ratio: 4/3) {
-			width: auto;
-			justify-content: center;	
-			
-			.btn:first-child {
-				margin-right: 5px;
-				
-				&.invisible {
-					display: none;
-				}
+			.sub-tile[data-alignment="center-right"] img {
+				object-position: 100% 50%;
 			}
-		}
-	}
-	}
-}
-
-
-
-// 05 WHOLESALE/ORDER
-
-.order {
-	form {
-		> input {
-			margin-top: 3em;
-		}
-		
-		h3 {
-			font-weight: bold;
-		}
-	}
-	
-	section {
-		margin: $gridSize 0;
-		
-		p {
-			max-width: 800px;
-		}
-		
-		.orderIntro {
-			margin: 0 0 10vh;
-		}
-	}
-}
-
-table {
-	width: 100%;
-	margin: 0 0 calc(#{$gridSize});
-	border-collapse: collapse;
-	display: table;
-	
-	tr {
-		&.itemRow {
-			border-top: 1px solid black;
-		}
-		
-		&.lookRow:last-child {
-			border-bottom: 1px solid black;
-		}
-		.style {
-			width: calc(#{$gridSize} * 3 - 2em);
-		}
-		.title {
-			width: calc(#{$gridSize} * 3 - 2em);
-		}
-		.material {
-			width: calc(#{$gridSize} * 6 - 2em);
-		}
-		.color {
-			width: calc(#{$gridSize} * 4 - 2em);
-		}
-
-		
-		td {
-			padding: 1em 2em 0 0;
-			vertical-align: top;
-			
-			@media only screen and (max-width: $medium) {
-				width: 100%;
-				padding: .5em 0;
+			.sub-tile[data-alignment="bottom-left"] img {
+				object-position: 0 100%;
 			}
-			
-			&.image {
-				height: 10em;
-				width: calc((#{$gridSize} * 2) - 30px - 2em);
-				border-bottom: 1px solid black;
-				cursor: pointer;
-				
-				@media only screen and (max-width: $medium) {
-					height: 16em;
-					width: auto;
-					border-bottom: unset;
-				}
-
-				img {
-					width: auto;
-					height: 100%;
-					
-					&:hover {
-						filter: brightness(1.15);
-					}
-				}
-			}			
-			
-			&.amounts {
-				padding: 1em 0;
-				ol {
-					list-style: none;
-					padding: 0;
-					
-					li {
-						display: inline;
-						white-space: nowrap;
-						margin-right: 1em;
-						
-						label {
-							margin: 0;
-							padding: 0;
-							display: inline-block;
-							margin-right: 20px;
-							font-weight: bold;
-							
-							&:after {
-								display: none;
-							}
-						}
-						
-						input {
-							width: 3em;
-							text-align: center;
-						}
-					}
-				}
+			.sub-tile[data-alignment="bottom-center"] img {
+				object-position: 50% 100%;
 			}
-			
-			&.sum {
-				text-align: right;
+			.sub-tile[data-alignment="bottom-right"] img {
+				object-position: 100% 100%;
 			}
 			
 			
-			&.look {
-				text-align: right;
-				padding: .5em 0;
-				
-				ul {
-					display: inline-block;
-					list-style: none;
-				}
-				li {
-					background: #BFA753;
-					margin: 0 0 1px 0;
-					display: inline;
-					padding: 3px;
-					
-					&:hover {
-						background: #DFC465;
-					}
-					
-					a {
-						text-decoration: none;
-						
-						&:hover { 
-								color: black;
-								text-decoration: none;
-						}
-					}
-				}
+			// Image animation
+			.sub-tile[data-animation="animation"] img {
+				background-repeat: no-repeat;
+				background-size: 75vw;
+				background-position: 95% center;
+				object-position: unset;
+				//animation: move 2s forwards;
+			}
+			.sub-tile[data-animation="animation-anchor"] img {
+				background-repeat: no-repeat;
+				background-size: 75vw;
+			}
+			
+			.sub-tile[data-animation="animation-anchor"].sub-tile[data-alignment="top-left"] img {
+				background-position: 0 0;
+			}
+			.sub-tile[data-animation="animation-anchor"].sub-tile[data-alignment="top-center"] img {
+				background-position: 50% 0;
+			}
+			.sub-tile[data-animation="animation-anchor"].sub-tile[data-alignment="top-right"] img {
+				background-position: 100% 0;
+			}
+			.sub-tile[data-animation="animation-anchor"].sub-tile[data-alignment="center-left"] img {
+				background-position: 0 50%;
+			}
+			.sub-tile[data-animation="animation-anchor"].sub-tile[data-alignment="center-center"] img {
+				background-position: 50% 50%;
+			}
+			.sub-tile[data-animation="animation-anchor"].sub-tile[data-alignment="center-right"] img {
+				background-position: 100% 50%;
+			}
+			.sub-tile[data-animation="animation-anchor"].sub-tile[data-alignment="bottom-left"] img {
+				background-position: 0 100%;
+			}
+			.sub-tile[data-animation="animation-anchor"].sub-tile[data-alignment="bottom-center"] img {
+				background-position: 50% 100%;
+			}
+			.sub-tile[data-animation="animation-anchor"].sub-tile[data-alignment="bottom-right"] img {
+				background-position: 100% 100%;
+			}
+			
+			// Text
+			.sub-tile.text p {
+				margin-left: 5px;
+				margin-bottom: 1.5em;
 			}
 		}
 	}
-}
-
-table.overview {
-	max-width: calc((#{$gridSize} * 18) - 30px);
-
-	tr {
-		border-top: 1px solid #666;
-		
-		&.grandTotal {
-			line-height: 3em;
-		}
-		
-		td {
-			padding: 5px 2em 5px 0;
-		}
-			
-		.style{
-			width: calc((#{$gridSize} * 3) - 30px - 2em);
-		}
-		.title{
-			width: calc(#{$gridSize} * 3 - 2em);
-		}
-		.colorway{
-			width: calc(#{$gridSize} * 3 - 2em);
-		}
-		.price {
-			width: calc(#{$gridSize} * 2 - 2em);
-		}
-		.amountRecipient {
-			width: calc(#{$gridSize} * 1 - 2em);
-		}
-	}
-}
-
-@media only screen and (max-width: $medium) {
-	table, thead, tbody, th, td, tr { 
-		display: block; 
-	}
-	
-	table {
-		tr {
-			margin-bottom: 1em;
-			td {
-				width: 100%;
-				padding: 0;
-				
-				input {
-					margin-bottom: 3px;
-				}
-				
-				&.style,
-				&.title,
-				&.material,
-				&.colorway,
-				&.price {
-					width: auto;
-				}
-				
-				
-				&.look {
-					text-align: left;
-				}
-			}
-		}
-		
-		&.overview {
-			width: 100%;
-			max-width: none;
-			
-			tr td {
-				padding: 0;
-				
-				&:first-child {
-					padding-top: .5em;
-				}
-				
-
-				&.orderedAmount {
-					padding-top: 1em;
-				}
-								
-				&.itemAmount {
-					padding-top: 1em;
-					&:before {
-						content: 'Total amount: ';
-						display: inline;
-					}
-				}
-				&.itemTotal {
-					&:before {
-						content: 'Item subtotal: ';
-						display: inline;
-					}
-				}
-			}
-			
-			tr.grandTotal {
-				td {
-					&:nth-child(2) {
-						display: none;
-					}
-					padding-top: .5em;
-					width: 33%;
-					display: table-cell;
-				}
-			}
-			
-		}
-	}
-}
-
-// 07 WORST FOR LAST: LET'S STYLE FORMS
-
-form {
-	margin: calc(#{$gridSize} / 2) 0 calc(#{$gridSize} / 4);
-	
-	@media only screen and (max-width: $small)	{
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-}
-
-label {
-	margin: 0 5px;
-	display: inline-grid;
-		
-	&::after {
-		content: attr(data-value) ' ';
-		visibility: hidden;
-		white-space: pre-wrap;
-	}
-	
-	@media only screen and (max-width: $small)	{
-		margin-bottom: .5em;
-	}
-}
-
-label::after,
-input {
-	border: none;
-	color: inherit;
-	grid-area: 1 / 2;
-	
-	font-family: "ClassicGrotesquePro-Regular", sans-serif;
-	font-size: 9pt;
-	line-height: 1.5em;
-	text-transform: uppercase;	
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	
-	color: black;
-	
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	appearance: none;
-	
-	&:invalid {
-		color: red;
-	}
-	
-	resize: none;
-	background: transparent;
-	border: 1px solid black;
-	outline: none;
-	
-	padding: 5px 15px;
-	// border-radius: 8px;
-	border-radius: 0;
-	
-	text-align: center;	
-	
-
-}
-
-::placeholder {
-	color: white;
-	opacity: .4;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="number"],
-input[type="checkbox"],
-input[type="password"] {
-	
-	/*
-	-webkit-box-shadow: inset 1px -1px 2px 1px rgba(0,0,0,0.25);
-	-moz-box-shadow: inset 1px -1px 2px 1px rgba(0,0,0,0.25);
-	box-shadow: inset 1px -1px 2px 1px rgba(0,0,0,0.25);
-	*/
-	
-	&::-webkit-outer-spin-button,
-	&::-webkit-inner-spin-button {
-  	-webkit-appearance: none;
-  	margin: 0;
-	}
-}
-
-@media only screen and (max-width: $small)	{
-	input[type="text"],
-	input[type="email"],
-	input[type="password"] {
-		min-width: 70px;
-	}	
-}
-
-.checkbox {
-	display: flex;
-	align-items: center;
-	
-	label {
-		display: inline;
-	}
-}
-
-input[type="checkbox"] {
-	width: 1.5em;
-	height: 1.5em;
-	padding: 2px;
-	margin-right: 5px;
-	
-	&:checked:after {
-		content: ' ';
-		display: block;
-		height: .8em;
-		width: .8em;
-		margin: .1em .1em;
-		position: absolute;
-		background: black;
-		border-radius: 2px;
-	}
-}
-
-
-input[type="submit"],
-a.btn {
-	background-color: $grey;
-	cursor: pointer;
-	margin: 0 5px;
-	
-	color: black;
-	text-decoration: none;
-	
-	// border-radius: 8px;
-	border-radius: 0;
-	border: 0;
-	
-	padding: 5px 15px;
-	
-	&:hover {
-		background-color: black;
-		color: white;
-	}
-	
-	&.inactive:hover {
-		background-color: $grey;
-	}
-	
-	@media only screen and (max-width: $small)	{
-		margin-top: 1em;
-	}
-}
-
-.honeypot {
-	position: absolute;
-	left: -9999px;
-}
-
-// SS21 theme
-body.register,
-body.login,
-body.film,
-body.videos,
-body.gallery {
-	
-	background: #306f67 url('../images/SS21-flowers-tonal.svg'); // no-repeat bottom center;
-	background-size: 80px;
-	background-position: 0 -20px;
-	
-	input[type="text"],
-	input[type="email"],
-	input[type="number"],
-	input[type="checkbox"],
-	[type="password"] {
-		//background: #EAE3C1;
-		-webkit-box-shadow: none;
-		-moz-box-shadow: none;
-		box-shadow: none;
-		
-		background: transparent;
-		border: 1px solid #BFA753;
-		color: #BFA753;
-	}
-	
-	input[type="submit"],
-	a.btn {
-		background: #BFA753;
-		padding: 5px 15px;
-		
-		&:hover {
-			background: #DFC465;
-			color: black;
-			text-decoration: none;
-		}
-	}
-	
-	a.btn + p {
-		margin-top: 1em;
-		min-height: 3em;
-		display: block;
-	}
-	
-	p {
-		color: #BFA753;
-	}
-	
-	.audioControls,
-	footer nav {
-		color: #BFA753;
-	}
-	
-	::placeholder {
-		color: #BFA753;
-		opacity: .6;
-	}
-}
-
-body.login {
-	background-color: black;
-}
-
-// PRESS OVERLAY
-.pressOverlay {
-	> a {
-		position: fixed;
-		left: calc(#{$gridSize} / 2);
-		bottom: calc(#{$gridSize} / 2);
-		color: #BFA753;
-		text-decoration: none;
-		
-		&:hover {
-			text-decoration: underline;
-		}
-		
-		@media (max-aspect-ratio: 4/3) {
-			bottom: calc(#{$gridSize} / 3);
-			left: 50vw;
-			transform: translate(-50%, 0);
-			padding: 0 15px;
-			color: black;
-		}
-	}
-	
-	article {
-		color: #BFA753;
-	}
-}
-
-// COOKIE OVERLAY
-.videos .cookieOverlay {
-	background: #BFA753;
-	
-	p {
-		color: black;
-	}
-}
-
-.cookieOverlay {
-	position: fixed;
-	left: calc(#{$gridSize} / 2);
-	bottom: calc(#{$gridSize} / 3);
-	z-index: 9999;
-	background: white;
-	padding: 10px;
-	
-	@media only screen and (max-width: $small)	{
-		left: calc(#{$gridSize} / 4);
-		bottom: calc(#{$gridSize} / 4);
-		max-width: calc(100vw - 30px - 20px);
-	}
-	
-	> p, 
-	> a {
-		color: black;
-	}
-	
-	p {
-		margin: 0;
-	}
-	
-	.flex {
-		a:first-child {
-			margin-right: 10px;
-		}
-	}
-}
-
-body.register .cookieOverlay,
-body.login .cookieOverlay,
-body.show .cookieOverlay,
-body.gallery .cookieOverlay {
-	background: #BFA753;
-}
-
-// AUX CLASSES
-
-.fadeIn {
-	animation: fadein 1.5s;
-}
-
-.fadeOut {
-	animation: fadein 1.5s;
-	animation-direction: alternate;
-}
-
-.invisible {
-	opacity: 0;
-}
-
-.visible {
-	opacity: 1;
-}
-
-.hidden {
-	display: none;
-}
-
-.inactive {
-	opacity: .4;
-}
-
-.pulse {
-	animation: pulse 1s infinite step-end;
-}
-
-.notouch {
-	touch-action: manipulation;
-}
-
-.noselect {
-	 -webkit-touch-callout: none;
-    -webkit-user-select: none;
-       -moz-user-select: none; 
-        -ms-user-select: none;
-            user-select: none;
 }

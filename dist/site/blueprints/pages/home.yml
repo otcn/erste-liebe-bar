@@ -1,0 +1,74 @@
+title: Home page
+
+fields:
+  layoutbuilder:
+    label: Layout builder
+    type: builder
+    columns: 2
+    fieldsets:
+      tiles:
+        name: Tile
+        fields:
+          tilebuilder:
+            type: builder
+            columns: 1
+            label:
+            fieldsets:
+              moduleimage:
+                label: Image
+                tabs:
+                  content:
+                    label: Content
+                    fields:
+                      image:
+                        label: 
+                        type: files
+                        max: 1
+                  style:
+                    label: Style
+                    fields:
+                      width:
+                        label: Image width
+                        type: radio
+                        default: full
+                        options:
+                          full: Full width
+                          half: Half width
+                      animate:
+                        label: Animation
+                        type: radio
+                        default: no-animation
+                        options:
+                          no-animation: No animation
+                          animate-ltr: Animate left to right
+                          animate-rtl: Animate right to left
+                          anchor: Animation anchor image
+                      alignment:
+                        label: Alignment
+                        type: radio
+                        default: center-center
+                        options:
+                          top-left: Top left
+                          top-center: Top center
+                          top-right: Top right
+                          center-left: Center left
+                          center-center: Center center
+                          center-right: Center right
+                          bottom-left: Bottom left
+                          bottom-center: Bottom center
+                          bottom-rigth: Bottom right
+              moduletext:
+                label: Text
+                fields:
+                  text:
+                    label: 
+                    type: textarea
+                    buttons:
+                      - link
+              moduleempty:
+                label: Empty tile
+                fields:
+                  empty:
+                    label: 
+                    type: info
+                    text: Leere Kachel
