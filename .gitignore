@@ -1,0 +1,12 @@
+dist/kirby
+dist/content
+dist/media
+dist/site/plugins
+dist/site/cache
+dist/site/accounts
+dist/site/sessions
+dist/assets/fonts
+node_modules
+.nova
+.DS_Store
+.sass-cache
