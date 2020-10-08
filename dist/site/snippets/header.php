@@ -22,7 +22,6 @@
 		<?php endif ?>
 		
 		<?= css(['assets/css/main.css', '@auto']) ?>
-		<?= js(['assets/js/main.min.js', '@auto']) ?>
 	</head>
 	
 	<body>

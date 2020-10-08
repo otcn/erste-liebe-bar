@@ -40,12 +40,13 @@ fields:
                         default: no-animation
                         options:
                           no-animation: No animation
-                          animate-ltr: Animate left to right
-                          animate-rtl: Animate right to left
-                          anchor: Animation anchor image
+                          animation: Animation
                       alignment:
                         label: Alignment
                         type: radio
+                        when:
+                          width: half
+                          animate: no-animation
                         default: center-center
                         options:
                           top-left: Top left
@@ -57,6 +58,15 @@ fields:
                           bottom-left: Bottom left
                           bottom-center: Bottom center
                           bottom-rigth: Bottom right
+                      direction:
+                        label: Direction
+                        type: radio
+                        when:
+                          width: half
+                          animate: animation
+                        options:
+                          horizontal: horizontal
+                          vertical: vertical
               moduletext:
                 label: Text
                 fields:
