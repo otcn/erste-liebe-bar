@@ -7,9 +7,12 @@ function animateImages(targetElement) {
     docViewTop = document.documentElement.scrollTop,
     docViewBottom = docViewTop + window.innerHeight / 2,
     elemTop = targetElement.offsetTop;
+    elemBottom = elemTop + targetElement.clientHeight;
 
-  if (elemTop <= docViewBottom) {
+  if (elemTop <= docViewBottom && elemBottom > docViewTop) {
     targetElement.classList.add('in-viewport');
+  } else {
+    targetElement.classList.remove('in-viewport');
   }
 }
 

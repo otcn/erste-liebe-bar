@@ -9,7 +9,7 @@
 	font-weight: normal;
   box-sizing: border-box;
 }
-ol {
+ol, ul {
 	list-style: none;
 }
 a {
@@ -43,7 +43,7 @@ $animationDuration: 2s;
 body {	
 	font-family: 'Trade Gothik LT Bold', sans-serif;
 	font-size: 1em;
-	line-height: 1.5em;
+	line-height: 1.25em;
 	text-transform: lowercase;
 		
 	text-rendering: optimizeLegibility;
@@ -66,9 +66,41 @@ img {
 
 header {
 	padding: 3px 5px;
-  position: sticky;
+  position: absolute;
+  width: 100vw;
   top: 0;
   background: white;
+  z-index: 1;
+  
+  @media screen and (max-width: 700px) {
+    position: sticky;
+  }
+}
+
+main {
+  width: 50vw;
+  padding: 0 5px;
+  
+  @media screen and (max-width: 700px) {
+    width: 100vw;
+  }
+  
+  h1 {
+    margin-top: 4em;
+    margin-bottom: 2em;
+  }
+  
+  h2 {
+    margin-top: 1.5em;
+    
+    &::after {
+      content: ':';
+    }
+  }
+  
+  p {
+    margin-bottom: 1em;
+  }
 }
 
 .tiles {
@@ -77,10 +109,11 @@ header {
 	
 	.tile {
 		width: 50vw;
-    height: calc(100vh - #{$headerHeight});
+    height: 100vh;
     
     @media screen and (max-width: 700px) {
       width: 100vw;
+      height: calc(100vh - #{$headerHeight});
       background: white;
       position: -webkit-sticky;
       top: 30px;
@@ -157,9 +190,26 @@ header {
       }
 			
 			// Text
-			.sub-tile.text p {
-				margin-left: 5px;
-				margin-bottom: 1.5em;
+			.sub-tile.text {
+        
+        p, ul, ol {
+  				margin-left: 5px;
+          margin-right: 5px;
+  				margin-bottom: 1.5em;
+        }
+        
+        ul, ol {
+          li {
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+        
+        code {
+          font-family: inherit;
+          font-size: inherit;
+          font-weight: inherit;
+        }
 			}
 		}
     

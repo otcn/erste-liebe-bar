@@ -2,7 +2,12 @@ title: Site
 
 sections:
 
-	pages:
-		type: pages
-		headline: Homepage
-		templates: home
+  frontpage:
+    headline: Drafts
+    type: pages
+    templates: home
+
+  genericpages:
+    headline: Published Articles
+    type: pages
+    templates: default

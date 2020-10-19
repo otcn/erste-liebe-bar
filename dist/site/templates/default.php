@@ -1,1 +1,7 @@
-<h1><?= $page->title() ?></h1>
+<? snippet('header') ?>
+
+<main>
+  <?= $page->text()->kt() ?>
+</main>
+
+<? snippet('footer') ?>
