@@ -6,14 +6,24 @@ function animateImages(targetElement) {
   let
     docViewTop = document.documentElement.scrollTop,
     docViewBottom = docViewTop + window.innerHeight / 2,
-    elemTop = targetElement.offsetTop;
+    elemTop = targetElement.offsetTop,
+    elemParentTop = targetElement.parentElement.parentElement.offsetTop,
     elemBottom = elemTop + targetElement.clientHeight;
 
-  if (elemTop <= docViewBottom && elemBottom > docViewTop) {
-    targetElement.classList.add('in-viewport');
+  if(window.innerWidth > 700) {
+    if (elemTop <= docViewBottom && elemBottom > docViewTop) {
+      targetElement.classList.add('in-viewport');
+    } else {
+      targetElement.classList.remove('in-viewport');
+    }
   } else {
-    targetElement.classList.remove('in-viewport');
+    if (elemParentTop < docViewTop + 60) {
+      targetElement.classList.add('in-viewport');
+    } else {
+      targetElement.classList.remove('in-viewport');
+    }
   }
+  
 }
 
 
