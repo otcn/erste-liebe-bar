@@ -52,6 +52,38 @@
       
     </ol>
     
+    <div class="menu hidden" id="menu">
+      <div>
+        <ol class="drinks">
+          <p>Drinks</p>
+          
+          <?
+          $drinks = $site->menudrinks()->toStructure();
+            
+          foreach ($drinks as $drink): ?>
+            <li>
+              <p><?= $drink->drink() ?></p>
+              <p><?= $drink->drinkprice() ?></p>
+            </li>
+          <? endforeach ?>
+        </ol>
+        
+        <ol class="food">
+          <p>Food</p>
+          
+          <?
+          $foods = $site->menufood()->toStructure();
+            
+          foreach ($foods as $food): ?>
+            <li>
+              <p><?= $food->food() ?></p>
+              <p><?= $food->foodprice() ?></p>
+            </li>
+          <? endforeach ?>
+        </ol>
+      </div>
+    </div>
+    
     <?= js(['assets/js/main.min.js', '@auto']) ?>
   </body>
 </html>

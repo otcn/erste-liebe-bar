@@ -32,8 +32,8 @@ fields:
                         type: radio
                         default: full
                         options:
-                          full: Full width
-                          half: Half width
+                          full: Full tile width
+                          half: Half tile width
                       animate:
                         label: Animation
                         type: radio
@@ -44,9 +44,6 @@ fields:
                       alignment:
                         label: Alignment
                         type: radio
-                        when:
-                          width: half
-                          animate: no-animation
                         default: center-center
                         options:
                           top-left: Top left
@@ -58,28 +55,18 @@ fields:
                           bottom-left: Bottom left
                           bottom-center: Bottom center
                           bottom-rigth: Bottom right
-                      direction:
-                        label: Direction
-                        type: radio
-                        when:
-                          width: half
-                          animate: animation
-                        options:
-                          horizontal: horizontal
-                          vertical: vertical
               moduletext:
                 label: Text
                 fields:
                   text:
                     label: 
                     type: textarea
+                    maxlength: 200
+                    size: medium
                     buttons:
                       - link
                       - ul
                       - ol
-                      - '|'
-                      - code
-                    help: To create a menu, use a mixture of a list and code formatting (</>) like that:</br>- espresso \`1,80\`</br>- cappucino \`3,20\`
               moduleempty:
                 label: Empty tile
                 fields:

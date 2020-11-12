@@ -1,13 +1,80 @@
 title: Site
 
-sections:
+tabs:
+ 
+  pages:
 
-  frontpage:
-    headline: Drafts
-    type: pages
-    templates: home
+    label: Pages
 
-  genericpages:
-    headline: Published Articles
-    type: pages
-    templates: default
+    sections:
+
+      frontpage:
+        headline: Homepage
+        type: pages
+        templates: home
+    
+      genericpages:
+        headline: Default pages
+        type: pages
+        templates:
+          - default
+          - error
+          
+  settings:
+
+    label: Settings
+
+    sections:
+      metaContent:
+        type: fields
+        fields:
+        
+          social:
+            label: Social
+            type: headline    
+          socialdescription:
+            label: Social description
+            type: textarea
+            size: small
+            width: 1/2
+            buttons:
+              - italic
+              - link
+              - ul
+              - ol
+          socialimage:
+            label: Social image
+            type: files
+            multiple: false
+            width: 1/2
+
+
+          menu:
+            label: Menu
+            type: headline    
+          menudrinks:
+            label: Drinks
+            type: structure
+            width: 1/2
+            fields:
+              drink:
+                label: Product
+                type: text
+                width: 1/2
+              drinkprice:
+                label: Price
+                type: text
+                width: 1/2
+          menufood:
+            label: Food
+            type: structure
+            width: 1/2
+            fields:
+              food:
+                label: Product
+                type: text
+                width: 1/2
+              foodprice:
+                label: Price
+                type: text
+                width: 1/2

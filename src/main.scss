@@ -7,7 +7,6 @@
 	padding: 0;
 	font-size: 1em;
 	font-weight: normal;
-  display: block;
   box-sizing: border-box;
 }
 ol, ul {
@@ -16,6 +15,10 @@ ol, ul {
 a {
 	text-decoration: none;
 	color: black;
+  
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 
@@ -33,7 +36,7 @@ a {
 	}
 }
 
-$headerHeight: 30px;
+$headerHeight: 26px;
 $animationDuration: 2s;
 
 
@@ -58,6 +61,16 @@ img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+  display: block;
+}
+
+.nowrap {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.hidden {
+  display: none;
 }
 
 
@@ -75,6 +88,10 @@ header {
   
   @media screen and (max-width: 700px) {
     position: sticky;
+  }
+  
+  a:hover {
+    text-decoration: none;
   }
 }
 
@@ -211,6 +228,10 @@ main {
           font-size: inherit;
           font-weight: inherit;
         }
+        
+        code, .number {
+          font-size: calc(1em - 1px);
+        }
 			}
 		}
     
@@ -248,71 +269,33 @@ main {
       // Half width animation
       .sub-tile[data-animation="animation"] {
 
-        // If animation direction is horizontal
-        &[data-direction="horizontal"] {
-
-          div {
-            width: 50vw;
-            height: 100%;
-          }
-          div:first-child {
-            left: 0;
-            background-position: 0vw 50%;
-          }
-          div:last-child {
-            left: 50%;
-            background-position: -15vw 50%;
-            
-            @media screen and (max-width: 700px) {
-              background-position: -35vw 50%;
-            }
-          }
+        div {
+          width: 50vw;
+          height: 100%;
+        }
+        div:first-child {
+          left: 0;
+          background-position: 0vw 50%;
+        }
+        div:last-child {
+          left: 50%;
+          background-position: -15vw 50%;
           
-          &.in-viewport {
-            div:last-child {
-              background-position: -25vw 50%;
-              
-              @media screen and (max-width: 700px) {
-                background-position: -50vw 50%;
-              }
-            }
+          @media screen and (max-width: 700px) {
+            background-position: -35vw 50%;
           }
-
         }
         
-        // If animation direction is vertical
-        &[data-direction="vertical"] {
-
-          div {
-            width: 50vw;
-            height: 100vh;
-            //background-size: auto 110%;
-          }
-          div:first-child {
-            left: 0;
-            background-position: 0 0vh;
-          }
+        &.in-viewport {
           div:last-child {
-            left: 50%;
-            background-position: -25vw -10vh;
+            background-position: -25vw 50%;
             
             @media screen and (max-width: 700px) {
-              background-position: -50vw -10vh;
+              background-position: -50vw 50%;
             }
           }
-          
-          &.in-viewport {
-            div:last-child {
-              background-position: -25vw 0vh;
-              
-              @media screen and (max-width: 700px) {
-                background-position: -50vw 0vh;
-              }
-            }
-          }
-
         }
-
+        
       }
       
       // 
@@ -350,59 +333,27 @@ main {
       
       // Half width animation
       .sub-tile[data-animation="animation"] {
-      
-        // If animation direction is horizontal
-        &[data-direction="horizontal"] {
 
-          div {
-            width: 50vw;
-            height: 100%;
-          }
-          div:first-child {
-            left: 0;
-            background-position: -10vw 50%;
-          }
-          div:last-child {
-            left: 50%;
-            background-position: -25vw 50%;
-            
-            @media screen and (max-width: 700px) {
-              background-position: -50vw 50%;
-            }
-          }
+        div {
+          width: 50vw;
+          height: 100%;
+        }
+        div:first-child {
+          left: 0;
+          background-position: -10vw 50%;
+        }
+        div:last-child {
+          left: 50%;
+          background-position: -25vw 50%;
           
-          &.in-viewport {
-            div:first-child {
-              background-position: 0vw 50%;
-            }
+          @media screen and (max-width: 700px) {
+            background-position: -50vw 50%;
           }
-
         }
         
-        // If animation direction is vertical
-        &[data-direction="vertical"] {
-          div {
-            width: 50vw;
-            height: 100vh;
-            //background-size: auto 110%;
-          }
+        &.in-viewport {
           div:first-child {
-            left: 0;
-            background-position: 0vw -10vh;
-          }
-          div:last-child {
-            left: 50%;
-            background-position: -25vw 0vh;
-            
-            @media screen and (max-width: 700px) {
-              background-position: -50vw 0vh;
-            }
-          }
-          
-          &.in-viewport {
-            div:first-child {
-              background-position: 0vw 0vh;
-            }
+            background-position: 0vw 50%;
           }
         }
 
@@ -410,6 +361,40 @@ main {
       
     }
     
-    
 	}
+}
+
+.menu {
+  
+  & > div {
+    display: flex;
+    
+    ol {
+      width: 50vw;
+      padding: 5px;
+      
+      & > p {
+        margin-bottom: 3em;
+      }
+      
+      li {
+        display: flex;
+        justify-content: space-between;
+        width: 50%;
+        min-height: 1em;
+      }
+    }
+  }
+ 
+}
+
+/*
+  PAGES
+*/
+
+// Error and default
+.template-error, .template-default {
+  .text {
+    padding-top: 3em;
+  }
 }

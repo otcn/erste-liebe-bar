@@ -39,7 +39,9 @@ window.addEventListener("load", function(e) {
     VARIABLES
   */
   
-  let subTiles = document.querySelectorAll('.sub-tile');
+  let subTiles = document.querySelectorAll('.sub-tile'),
+      menu = document.querySelector('#menu'),
+      anchor = document.querySelector('.anchor');
   
   
   /*
@@ -49,6 +51,13 @@ window.addEventListener("load", function(e) {
   subTiles.forEach((subTile) => {
     animateImages(subTile);
   });
+  
+  anchor.addEventListener('click', function(e) {
+    
+    menu.classList.remove('hidden');
+    
+    
+  })
   
 });
 
