@@ -53,6 +53,9 @@
     </ol>
     
     <div class="menu hidden" id="menu">
+      
+      <div><a href="#menu-anchor" class="anchor">Back to top</a></div>
+      
       <div>
         <ol class="drinks">
           <p>Drinks</p>
@@ -80,6 +83,7 @@
               <p><?= $food->foodprice() ?></p>
             </li>
           <? endforeach ?>
+          
         </ol>
       </div>
     </div>

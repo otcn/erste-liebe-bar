@@ -41,7 +41,7 @@ window.addEventListener("load", function(e) {
   
   let subTiles = document.querySelectorAll('.sub-tile'),
       menu = document.querySelector('#menu'),
-      anchor = document.querySelector('.anchor');
+      anchorLinks = document.querySelectorAll('.anchor');
   
   
   /*
@@ -52,12 +52,15 @@ window.addEventListener("load", function(e) {
     animateImages(subTile);
   });
   
-  anchor.addEventListener('click', function(e) {
+  anchorLinks.forEach((anchorLink) => {
     
-    menu.classList.remove('hidden');
+    anchorLink.addEventListener('click', function(e) {
+      
+      menu.classList.toggle('hidden');
+      
+    })
     
-    
-  })
+  });
   
 });
 

@@ -367,21 +367,63 @@ main {
 .menu {
   
   & > div {
-    display: flex;
+    padding: 5px;
+    
+    &:first-child {
+      width: 75%;
+      position: sticky;
+      top: 0;
+      left: 35%;
+      text-align: center;
+      padding: calc(50vh - 15px) 0 0 0;
+      
+      @media screen and (max-width: 700px) {
+        display: none;
+      }
+    }
+    
+    &:last-child {
+      margin-top: calc(-50vh - 7.5px);
+      
+      @media screen and (max-width: 700px) {
+        margin: 0;
+        padding-top: calc(1em + 26px);
+      }
+    }
     
     ol {
       width: 50vw;
-      padding: 5px;
+      
+      &:first-child {
+        margin-bottom: 3em;
+      }
+      
+      @media screen and (max-width: 700px) {
+        width: 100%;
+      }
       
       & > p {
-        margin-bottom: 3em;
+        margin-bottom: 1.5em;
       }
       
       li {
         display: flex;
         justify-content: space-between;
         width: 50%;
-        min-height: 1em;
+        min-height: .5em;
+        margin-bottom: .25em;
+        
+        @media screen and (max-width: 700px) {
+          width: 100%
+        }
+        
+        p:first-child {
+          width: 80%;
+        }
+        p:last-child {
+          width: 20%;
+          text-align: right;
+        }
       }
     }
   }
