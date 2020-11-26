@@ -9,8 +9,6 @@ function animateImages(targetElement) {
     elemTop = targetElement.offsetTop,
     elemParentTop = targetElement.parentElement.parentElement.offsetTop,
     elemBottom = elemTop + targetElement.clientHeight;
-
-  console.log(docViewTop);
   
   if(window.innerWidth > 700) {
     if (elemTop <= docViewBottom && elemBottom > docViewTop) {
