@@ -87,7 +87,7 @@ header {
   z-index: 1;
   
   @media screen and (max-width: 700px) {
-    position: sticky;
+    position: fixed;
   }
   
   a:hover {
@@ -131,10 +131,10 @@ main {
     
     @media screen and (max-width: 700px) {
       width: 100vw;
-      height: calc(100vh - #{$headerHeight});
+      height: 100vh;
       background: white;
       position: -webkit-sticky;
-      top: 30px;
+      top: $headerHeight;
     }
 		
 		.sub-tiles {
@@ -251,23 +251,23 @@ main {
         }
         div:first-child {
           left: 0;
-          background-position: 0vw 0vh;
+          background-position: -15vw 0vh;
         }
         div:last-child {
           left: 0;
           top: 50%;
-          background-position: -15vw calc(-50vh + 15px);
+          background-position: 0vw -50vh;
         }
         
         &.in-viewport {
           div:last-child {
-            background-position: 0vw calc(-50vh + 15px);
+            background-position: -15vw -50vh;
           }
         }
       }
 
       // Half width animation
-      .sub-tile[data-animation="animation"] {
+      .sub-tile[data-animation="animation"][data-width="half-width"] {
 
         div {
           width: 50vw;
@@ -316,23 +316,23 @@ main {
         }
         div:first-child {
           left: 0;
-          background-position: -15vw 0vh;
+          background-position: 0vw 0vh;
         }
         div:last-child {
           left: 0;
           top: 50%;
-          background-position: 0vw calc(-50vh + 15px);
+          background-position: -15vw -50vh;
         }
         
         &.in-viewport {
           div:last-child {
-            background-position: -15vw calc(-50vh + 15px);
+            background-position: 0vw -50vh;
           }
         }
       }
       
       // Half width animation
-      .sub-tile[data-animation="animation"] {
+      .sub-tile[data-animation="animation"][data-width="half-width"] {
 
         div {
           width: 50vw;
@@ -395,7 +395,7 @@ main {
       width: 50vw;
       
       &:first-child {
-        margin-bottom: 3em;
+        margin-bottom: 4em;
       }
       
       @media screen and (max-width: 700px) {
@@ -403,7 +403,7 @@ main {
       }
       
       & > p {
-        margin-bottom: 1.5em;
+        margin-bottom: 1em;
       }
       
       li {

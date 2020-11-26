@@ -4,12 +4,14 @@
 
 function animateImages(targetElement) {
   let
-    docViewTop = document.documentElement.scrollTop,
+    docViewTop = window.pageYOffset,
     docViewBottom = docViewTop + window.innerHeight / 2,
     elemTop = targetElement.offsetTop,
     elemParentTop = targetElement.parentElement.parentElement.offsetTop,
     elemBottom = elemTop + targetElement.clientHeight;
 
+  console.log(docViewTop);
+  
   if(window.innerWidth > 700) {
     if (elemTop <= docViewBottom && elemBottom > docViewTop) {
       targetElement.classList.add('in-viewport');
@@ -81,6 +83,7 @@ window.addEventListener('scroll', function() {
   subTiles.forEach((subTile) => {
     animateImages(subTile);
   });
+
 });
 
 
