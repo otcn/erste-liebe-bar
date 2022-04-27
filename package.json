@@ -6,7 +6,7 @@
   "author": "WAF GMBH",
   "License": "MIT",
   "devDependencies": {
-    "grunt": "^1.1.0",
+    "grunt": "^1.5.2",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-terser": "^1.0.0",
     "grunt-contrib-watch": "^1.1.0"
